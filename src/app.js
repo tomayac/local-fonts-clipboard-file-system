@@ -5,9 +5,15 @@ const ctx = canvas.getContext('2d', {
     desynchronized: true
 });
 
-ctx.fillStyle = 'white';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-ctx.fillStyle = 'black';
+const clear = () => {
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black';
+};
+clear();
+
+const btnClear =document.querySelector('#clear');
+btnClear.addEventListener('click', clear);
 
 let previousPoint = null;
 canvas.addEventListener('pointerdown', event => {
@@ -111,3 +117,14 @@ if ('launchQueue' in window) {
         }
     });
 }
+
+const inputFont = document.querySelector('#font');
+inputFont.disabled = !('fonts' in navigator);
+
+const btnWrite = document.querySelector('#write');
+btnWrite.addEventListener('click', () => {
+    const text = window.prompt('Enter your text');
+    ctx.font = `50px '${inputFont.value || 'Comic Sans MS'}'`;
+    const dimensions = ctx.measureText(text);
+    ctx.fillText(text, canvas.width / 2 - dimensions.width / 2, canvas.height / 2 - dimensions.emHeightDescent / 2);
+});

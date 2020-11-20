@@ -1,14 +1,17 @@
 {
-  "name": "capabilities-workshop",
+  "name": "local-fonts-clipboard-file-system",
   "version": "1.0.0",
   "scripts": {
-    "start": "lite-server",
-    "workbox": "workbox"
+    "start": "npm-run-all --parallel workbox server",
+    "server": "npx http-server",
+    "prepare": "npm run workbox",
+    "workbox": "workbox generateSW"
   },
-  "author": "Christian Liebel",
-  "license": "BSD-3-Clause",
+  "author": "Thomas Steiner",
+  "license": "Apache-2.0",
   "devDependencies": {
-    "lite-server": "^2.5.4",
+    "http-server": "^0.12.3",
+    "npm-run-all": "^4.1.5",
     "workbox-cli": "^5.1.4"
   }
 }
